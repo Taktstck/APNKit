@@ -8,18 +8,38 @@
 
 #import <Foundation/Foundation.h>
 
+typedef NS_ENUM(NSInteger, APNImageSize) {
+    APNImageSizeOriginal,
+    APNImageSizeThumbnail,
+    APNImageSizeSmall,
+    APNImageSizeMedium,
+    APNImageSizeLarge
+};
+
+
+NS_ASSUME_NONNULL_BEGIN
+
 @class APNGEO, APNUser;
 
 @interface APNImage : NSObject
 
-@property (nonatomic) NSString *id;
-@property (nonatomic) NSString *name;
-@property (nonatomic) NSString *encoding;
-@property (nonatomic) NSString *mimetype;
-@property (nonatomic) NSData *data;
-@property (nonatomic) APNGEO *geo;
-@property (nonatomic) APNUser *owner;
-@property (nonatomic) NSString *dominant_color;
-@property (nonatomic) NSNumber *favorite_count;
+@property (nullable, nonatomic, retain) NSString *id;
+@property (nullable, nonatomic, retain) NSString *name;
+@property (nullable, nonatomic, retain) NSString *encoding;
+@property (nullable, nonatomic, retain) NSString *mimetype;
+@property (nullable, nonatomic, retain) APNGEO *geo;
+@property (nullable, nonatomic, retain) APNUser *owner;
+@property (nullable, nonatomic, retain) NSString *dominant_color;
+@property (nullable, nonatomic, retain) NSNumber *favorite_count;
+
+// size
+@property (nullable, nonatomic, retain) NSData *extraLarge;
+@property (nullable, nonatomic, retain) NSData *large;
+@property (nullable, nonatomic, retain) NSData *medium;
+@property (nullable, nonatomic, retain) NSData *original;
+@property (nullable, nonatomic, retain) NSData *small;
+@property (nullable, nonatomic, retain) NSData *thumbnail;
 
 @end
+
+NS_ASSUME_NONNULL_END
