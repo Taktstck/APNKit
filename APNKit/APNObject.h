@@ -19,6 +19,7 @@
 #import "APNComment.h"
 #import "APNTag.h"
 #import "APNError.h"
+#import "APNServerMessage.h"
 
 
 #endif /* APNObject_h */

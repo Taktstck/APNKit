@@ -10,6 +10,18 @@
 
 @implementation APNObjectMapping
 
++ (RKObjectMapping *)errorMapping
+{
+    RKObjectMapping *mapping = [RKObjectMapping mappingForClass:[APNError class]];
+    [mapping addAttributeMappingsFromArray:@[
+                                             @"code",
+                                             @"message"
+                                             ]];
+    
+    
+    return mapping;
+}
+
 + (RKObjectMapping *)accountMapping
 {
     RKObjectMapping *mapping = [RKObjectMapping mappingForClass:[APNAccount class]];
@@ -182,6 +194,17 @@
     return mapping;
 }
 
+// FIXME
++ (RKObjectMapping *)serverMessageMapping
+{
+    RKObjectMapping *mapping = [RKObjectMapping mappingForClass:[APNPlacemark class]];
+    [mapping addAttributeMappingsFromArray:@[
+                                             @"errors",
+                                             @"created_at",
+                                             @"text"
+                                             ]];
+    return mapping;
+}
 
 
 @end

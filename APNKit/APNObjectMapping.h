@@ -12,6 +12,7 @@
 
 @interface APNObjectMapping : NSObject
 
++ (RKObjectMapping *)errorMapping;
 + (RKObjectMapping *)accountMapping;
 + (RKObjectMapping *)userMapping;
 + (RKObjectMapping *)communityMapping;
@@ -21,5 +22,6 @@
 + (RKObjectMapping *)imageMapping;
 + (RKObjectMapping *)tagMapping;
 + (RKObjectMapping *)commentMapping;
++ (RKObjectMapping *)serverMessageMapping;
 
 @end
