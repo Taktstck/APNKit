@@ -10,10 +10,24 @@
 #import <RestKit/RestKit.h>
 #import "APNObject.h"
 
+
+typedef NS_ENUM(NSInteger, APNImageSize) {
+    APNImageSizeOriginal,
+    APNImageSizeThumbnail,
+    APNImageSizeSmall,
+    APNImageSizeMedium,
+    APNImageSizeLarge
+};
+
+@protocol APNImageLoaderDelegate;
 @interface APNImageLoader : NSObject
 
+@property (nonatomic, copy) NSString *baseURL;
+@property (nonatomic, weak) id <APNImageLoaderDelegate> delegate;
 
 + (APNImageLoader *)sharedInstance;
+
+
 
 - (void)getImageAtPath:(NSString *)path completionHandler:(void (^)(NSData *, UIImage *, NSError *))completion;
 - (void)getImageAtPath:(NSString *)path cache:(BOOL)cache completionHandler:(void (^)(NSURLResponse *, NSData *, UIImage *, NSError *))completion;
@@ -25,5 +39,13 @@
 @interface APNImageLoader (APNImage)
 
 - (void)getImageForImage:(APNImage *)image size:(APNImageSize)size completionHandler:(void (^)(NSData *, UIImage *, NSError *))completion;
+
+@end
+
+
+@protocol APNImageLoaderDelegate <NSObject>
+
+- (NSString *)pathForSize:(APNImageSize)size;
+- (NSCache *)cacheForSize:(APNImageSize)size;
 
 @end

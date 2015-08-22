@@ -78,7 +78,9 @@ static APNImageLoader *_sharedInstance = nil;
         
         if (data) {
             image = [UIImage imageWithData:data];
-            [__imageCache setObject:image forKey:path];
+            if (image) {
+                [__imageCache setObject:image forKey:path];
+            }
         }
         
         completion(data, image, error);
@@ -117,7 +119,9 @@ static APNImageLoader *_sharedInstance = nil;
         
         if (data) {
             image = [UIImage imageWithData:data];
-            [__imageCache setObject:image forKey:path];
+            if (image) {
+                [__imageCache setObject:image forKey:path];
+            }
         }
         
         completion(response, data, image, error);
@@ -157,7 +161,9 @@ static APNImageLoader *_sharedInstance = nil;
         
         if (data) {
             UIImage *image = [UIImage imageWithData:data];
-            [__imageCache setObject:image forKey:path];
+            if (image) {
+                [__imageCache setObject:image forKey:path];
+            }
             success(response, data, image);
         }
     }] resume];
@@ -187,7 +193,7 @@ static APNImageLoader *_sharedInstance = nil;
 
 - (void)getImageForImage:(APNImage *)image size:(APNImageSize)size completionHandler:(void (^)(NSData *, UIImage *, NSError *))completion
 {
-    
+    /*
     NSString *baseURL = [[RKObjectManager sharedManager].baseURL description];
     NSString *path;
     
@@ -214,7 +220,12 @@ static APNImageLoader *_sharedInstance = nil;
             path = [NSString stringWithFormat:@"%@/1/media/image/%@",baseURL,image.id];
             break;
     }
-    
+     */
+    NSString *path = nil;
+    if ([self.delegate respondsToSelector:@selector(pathForSize:)]) {
+        path = [self.delegate pathForSize:size];
+    }
+    path = [NSString stringWithFormat:@"%@%@", self.baseURL, path];
     if ([_requestingUrls objectForKey:path]) {
         return;
     }
@@ -234,7 +245,9 @@ static APNImageLoader *_sharedInstance = nil;
             
             if (data) {
                 image = [UIImage imageWithData:data];
-                [__imageCache setObject:image forKey:path];
+                if (image) {
+                    [__imageCache setObject:image forKey:path];
+                }
             }
             
             completion(data, image, error);

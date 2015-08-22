@@ -8,14 +8,6 @@
 
 #import <Foundation/Foundation.h>
 
-typedef NS_ENUM(NSInteger, APNImageSize) {
-    APNImageSizeOriginal,
-    APNImageSizeThumbnail,
-    APNImageSizeSmall,
-    APNImageSizeMedium,
-    APNImageSizeLarge
-};
-
 
 NS_ASSUME_NONNULL_BEGIN
 
