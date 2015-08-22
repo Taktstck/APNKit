@@ -27,8 +27,6 @@ typedef NS_ENUM(NSInteger, APNImageSize) {
 
 + (APNImageLoader *)sharedInstance;
 
-
-
 - (void)getImageAtPath:(NSString *)path completionHandler:(void (^)(NSData *, UIImage *, NSError *))completion;
 - (void)getImageAtPath:(NSString *)path cache:(BOOL)cache completionHandler:(void (^)(NSURLResponse *, NSData *, UIImage *, NSError *))completion;
 - (void)getImageAtPath:(NSString *)path cache:(BOOL)cache success:(void (^)(NSURLResponse *, NSData *, UIImage *))success failure:(void (^)(NSError *))failure;
@@ -45,7 +43,7 @@ typedef NS_ENUM(NSInteger, APNImageSize) {
 
 @protocol APNImageLoaderDelegate <NSObject>
 
-- (NSString *)pathForSize:(APNImageSize)size;
+- (NSString *)pathForSize:(APNImageSize)size image:(APNImage *)image;
 - (NSCache *)cacheForSize:(APNImageSize)size;
 
 @end

@@ -10,6 +10,10 @@
 
 @interface APNImageLoader ()
 
+@property (readonly) NSOperationQueue *networkQueue;
+@property (readonly) NSCache *imageCache;
+@property (readonly) NSCache *thumbnaillCache;
+@property (readonly) NSCache *requestingUrls;
 
 @end
 
@@ -20,6 +24,9 @@
     NSCache *_thumbnaillCache;
     NSCache *_requestingUrls;
 }
+
+@dynamic networkQueue, imageCache, thumbnaillCache, requestingUrls;
+
 static APNImageLoader *_sharedInstance = nil;
 
 + (APNImageLoader *)sharedInstance
@@ -36,23 +43,57 @@ static APNImageLoader *_sharedInstance = nil;
 {
     self = [super init];
     if (self) {
-        _networkQueue = [NSOperationQueue new];
         
-        _requestingUrls = [NSCache new];
-        _requestingUrls.countLimit = 20;
-        
-        _imageCache = [NSCache new];
-        _imageCache.countLimit = 40;
-
-        _thumbnaillCache = [NSCache new];
-        _thumbnaillCache.countLimit = 100;
     }
     return self;
 }
 
+- (NSOperationQueue *)networkQueue
+{
+    @synchronized(self) {
+        if (_networkQueue) {
+            return _networkQueue;
+        }
+        _networkQueue = [NSOperationQueue new];
+        return _networkQueue;
+    }
+}
+
+- (NSCache *)imageCache
+{
+    if (_imageCache) {
+        return _imageCache;
+    }
+    
+    _imageCache = [NSCache new];
+    _imageCache.countLimit = 40;
+    
+    return _imageCache;
+}
+
+- (NSCache *)thumbnaillCache
+{
+    if (_thumbnaillCache) {
+        return _thumbnaillCache;
+    }
+    _thumbnaillCache = [NSCache new];
+    _thumbnaillCache.countLimit = 100;
+    return _thumbnaillCache;
+}
+
+- (NSCache *)requestingUrls
+{
+    if (_requestingUrls) {
+        return _requestingUrls;
+    }
+    _requestingUrls = [NSCache new];
+    _requestingUrls.countLimit = 20;
+    return _requestingUrls;
+}
+
 - (void)getImageAtPath:(NSString *)path completionHandler:(void (^)(NSData *, UIImage *, NSError *))completion
 {
-    UIImage *image = (UIImage *)[_imageCache objectForKey:path];
+    UIImage *image = (UIImage *)[self.imageCache objectForKey:path];
     if (image) {
         completion(nil, image, nil);
         return;
@@ -63,13 +104,13 @@ static APNImageLoader *_sharedInstance = nil;
 
 - (void)_getImageAtPath:(NSString *)path completionHandler:(void (^)(NSData *, UIImage *, NSError *))completion
 {
-    if ([_requestingUrls objectForKey:path]) {
+    if ([self.requestingUrls objectForKey:path]) {
         return;
     }
     
     NSURLRequest *req = [NSURLRequest requestWithURL:[NSURL URLWithString:path] cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData timeoutInterval:20];
-    NSCache *__imageCache = _imageCache;
-    NSCache *__requestingUrls = _requestingUrls;
+    NSCache *__imageCache = self.imageCache;
+    NSCache *__requestingUrls = self.requestingUrls;
     
     [[[NSURLSession sharedSession] dataTaskWithRequest:req completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
         
@@ -90,7 +131,7 @@ static APNImageLoader *_sharedInstance = nil;
 - (void)getImageAtPath:(NSString *)path cache:(BOOL)cache completionHandler:(void (^)(NSURLResponse *, NSData *, UIImage *, NSError *))completion
 {
     if (cache) {
-        UIImage *image = (UIImage *)[_imageCache objectForKey:path];
+        UIImage *image = (UIImage *)[self.imageCache objectForKey:path];
         if (image) {
             completion(nil, nil, image, nil);
             return;
@@ -104,13 +145,13 @@ static APNImageLoader *_sharedInstance = nil;
 
 - (void)_getImageAtPath:(NSString *)path cache:(BOOL)cache completionHandler:(void (^)(NSURLResponse *, NSData *, UIImage *, NSError *))completion
 {
-    if ([_requestingUrls objectForKey:path]) {
+    if ([self.requestingUrls objectForKey:path]) {
         return;
     }
     
     NSURLRequest *req = [NSURLRequest requestWithURL:[NSURL URLWithString:path] cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData timeoutInterval:20];
-    NSCache *__imageCache = _imageCache;
-    NSCache *__requestingUrls = _requestingUrls;
+    NSCache *__imageCache = self.imageCache;
+    NSCache *__requestingUrls = self.requestingUrls;
     
     [[[NSURLSession sharedSession] dataTaskWithRequest:req completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
         
@@ -131,7 +172,7 @@ static APNImageLoader *_sharedInstance = nil;
 
 - (void)getImageAtPath:(NSString *)path cache:(BOOL)cache success:(void (^)(NSURLResponse *, NSData *, UIImage *))success failure:(void (^)(NSError *))failure
 {
-    UIImage *image = (UIImage *)[_imageCache objectForKey:path];
+    UIImage *image = (UIImage *)[self.imageCache objectForKey:path];
     if (image) {
         success(nil, nil, image);
         return;
@@ -142,13 +183,13 @@ static APNImageLoader *_sharedInstance = nil;
 
 - (void)_getImageAtPath:(NSString *)path cache:(BOOL)cache success:(void (^)(NSURLResponse *, NSData *, UIImage *))success failure:(void (^)(NSError *))failure
 {
-    if ([_requestingUrls objectForKey:path]) {
+    if ([self.requestingUrls objectForKey:path]) {
         return;
     }
     
     NSURLRequest *req = [NSURLRequest requestWithURL:[NSURL URLWithString:path] cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData timeoutInterval:20];
-    NSCache *__imageCache = _imageCache;
-    NSCache *__requestingUrls = _requestingUrls;
+    NSCache *__imageCache = self.imageCache;
+    NSCache *__requestingUrls = self.requestingUrls;
     
     [[[NSURLSession sharedSession] dataTaskWithRequest:req completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
         
@@ -193,40 +234,13 @@ static APNImageLoader *_sharedInstance = nil;
 
 - (void)getImageForImage:(APNImage *)image size:(APNImageSize)size completionHandler:(void (^)(NSData *, UIImage *, NSError *))completion
 {
-    /*
-    NSString *baseURL = [[RKObjectManager sharedManager].baseURL description];
-    NSString *path;
     
-    switch (size) {
-            
-        case APNImageSizeThumbnail:
-            path = [NSString stringWithFormat:@"%@/1/media/image/%@?size=thumbnail",baseURL,image.id];
-            break;
-            
-        case APNImageSizeSmall:
-            path = [NSString stringWithFormat:@"%@/1/media/image/%@?size=small",baseURL,image.id];
-            break;
-            
-        case APNImageSizeMedium:
-            path = [NSString stringWithFormat:@"%@/1/media/image/%@?size=medium",baseURL,image.id];
-            break;
-            
-        case APNImageSizeLarge:
-            path = [NSString stringWithFormat:@"%@/1/media/image/%@?size=large",baseURL,image.id];
-            break;
-            
-        case APNImageSizeOriginal:
-        default:
-            path = [NSString stringWithFormat:@"%@/1/media/image/%@",baseURL,image.id];
-            break;
-    }
-     */
     NSString *path = nil;
-    if ([self.delegate respondsToSelector:@selector(pathForSize:)]) {
-        path = [self.delegate pathForSize:size];
+    if ([self.delegate respondsToSelector:@selector(pathForSize:image:)]) {
+        path = [self.delegate pathForSize:size image:image];
     }
     path = [NSString stringWithFormat:@"%@%@", self.baseURL, path];
-    if ([_requestingUrls objectForKey:path]) {
+    if ([self.requestingUrls objectForKey:path]) {
         return;
     }
 
@@ -236,7 +250,7 @@ static APNImageLoader *_sharedInstance = nil;
     } else {
         NSURLRequest *req = [NSURLRequest requestWithURL:[NSURL URLWithString:path] cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData timeoutInterval:20];
         __weak NSCache *__imageCache = [self imageCacheForSize:size];
-        __weak NSCache *__requestingUrls = _requestingUrls;
+        __weak NSCache *__requestingUrls = self.requestingUrls;
         
         [[[NSURLSession sharedSession] dataTaskWithRequest:req completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
             

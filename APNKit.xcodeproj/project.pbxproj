@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8C2C884C1B88158C00C256CB /* APNObjectManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C2C884B1B88158C00C256CB /* APNObjectManager.m */; };
 		8C43B2261B84E28A009A0BF5 /* APNUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C43B2251B84E28A009A0BF5 /* APNUser.m */; };
 		8C43B2291B84E2AB009A0BF5 /* APNPlacemark.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C43B2281B84E2AB009A0BF5 /* APNPlacemark.m */; };
 		8C43B22C1B84E702009A0BF5 /* APNComment.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C43B22B1B84E702009A0BF5 /* APNComment.m */; };
@@ -45,6 +46,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		8C2C884A1B88158C00C256CB /* APNObjectManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APNObjectManager.h; sourceTree = "<group>"; };
+		8C2C884B1B88158C00C256CB /* APNObjectManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APNObjectManager.m; sourceTree = "<group>"; };
 		8C43B2241B84E28A009A0BF5 /* APNUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APNUser.h; sourceTree = "<group>"; };
 		8C43B2251B84E28A009A0BF5 /* APNUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APNUser.m; sourceTree = "<group>"; };
 		8C43B2271B84E2AB009A0BF5 /* APNPlacemark.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APNPlacemark.h; sourceTree = "<group>"; };
@@ -152,11 +155,13 @@
 				8C60049A1B86AE0400AC07E2 /* AppDelegate.m */,
 				8C6004961B86ADEE00AC07E2 /* ViewController.h */,
 				8C6004971B86ADEF00AC07E2 /* ViewController.m */,
+				8C43B2301B855DA8009A0BF5 /* APNObject.h */,
+				8C2C884A1B88158C00C256CB /* APNObjectManager.h */,
+				8C2C884B1B88158C00C256CB /* APNObjectManager.m */,
 				8C6945CC1B840C38009D9370 /* APNImageLoader.h */,
 				8C6945CD1B840C38009D9370 /* APNImageLoader.m */,
 				8C6945CF1B840CF7009D9370 /* APNObjectMapping.h */,
 				8C6945D01B840CF7009D9370 /* APNObjectMapping.m */,
-				8C43B2301B855DA8009A0BF5 /* APNObject.h */,
 				8C43B2241B84E28A009A0BF5 /* APNUser.h */,
 				8C43B2251B84E28A009A0BF5 /* APNUser.m */,
 				8C6945D21B840D24009D9370 /* APNCommunity.h */,
@@ -393,6 +398,7 @@
 				8C6945D11B840CF7009D9370 /* APNObjectMapping.m in Sources */,
 				8C43B2331B855E25009A0BF5 /* APNError.m in Sources */,
 				8C43B22C1B84E702009A0BF5 /* APNComment.m in Sources */,
+				8C2C884C1B88158C00C256CB /* APNObjectManager.m in Sources */,
 				8C60049B1B86AE0400AC07E2 /* AppDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
