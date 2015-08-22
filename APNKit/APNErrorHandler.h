@@ -24,7 +24,7 @@ typedef NS_ENUM(NSInteger, APNErrorType) {
 @property (nonatomic, weak) id <APNErrorHandlerDelegate> accountManager;
 @property (nonatomic, weak) id <APNErrorHandlerDelegate> delegate;
 
-+ (void)error:(NSError *)error handler:(void (^)(APNErrorType, NSArray <APNError *>*))completion;
++ (void)error:(NSError *)error handler:(void (^)(APNErrorType errorType, NSArray <APNError *>*errors))completion;
 
 @end
 

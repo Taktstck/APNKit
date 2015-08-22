@@ -58,7 +58,7 @@
 
 @implementation APNErrorHandler
 
-+ (void)error:(NSError *)error handler:(void (^)(APNErrorType, NSArray<APNError *> *))completion
++ (void)error:(NSError *)error handler:(void (^)(APNErrorType errorType, NSArray <APNError *>*errors))completion
 {
     NSError *err = nil;
     NSDictionary *errorDict = [NSJSONSerialization JSONObjectWithData:[[[error userInfo] valueForKey:NSLocalizedRecoverySuggestionErrorKey] dataUsingEncoding:NSUTF8StringEncoding] options:0 error:&err];
