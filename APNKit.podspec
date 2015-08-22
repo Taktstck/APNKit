@@ -8,7 +8,7 @@ Pod::Spec.new do |s|
   s.platform     = :ios, "8.0"
   s.source       = { :git => "https://github.com/Taktstck/APNKit.git", :tag => "0.2.0" }
   s.source_files  = "APNKit", "APNKit/**/*.{h,m}"
-  s.exclude_files = ["APNKit/**/AppDelegate.*", "APNKit/**/main.m", "APNKit/**/ViewController.h", "APNKit/**/Info.plist"]
+  s.exclude_files = ["APNKit/**/AppDelegate.*", "APNKit/**/main.*", "APNKit/**/ViewController.*", "APNKit/**/Info.plist"]
   s.public_header_files = "APNKit/**/*.h"
   # s.framework  = "SomeFramework"
   # s.frameworks = "SomeFramework", "AnotherFramework"
