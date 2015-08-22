@@ -86,6 +86,7 @@
 		8C6945DC1B840D54009D9370 /* APNGEO.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APNGEO.m; sourceTree = "<group>"; };
 		8C6945DE1B840D6C009D9370 /* APNImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APNImage.h; sourceTree = "<group>"; };
 		8C6945DF1B840D6C009D9370 /* APNImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APNImage.m; sourceTree = "<group>"; };
+		8CCC6F191B8843B700F05990 /* APNKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = APNKit.h; sourceTree = "<group>"; };
 		D1A320355A2AE07E0E270746 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		EE4E8ECED2B9A5DC9B223A1A /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		F2D17E47E0362EC2B371D745 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
@@ -155,6 +156,7 @@
 				8C60049A1B86AE0400AC07E2 /* AppDelegate.m */,
 				8C6004961B86ADEE00AC07E2 /* ViewController.h */,
 				8C6004971B86ADEF00AC07E2 /* ViewController.m */,
+				8CCC6F191B8843B700F05990 /* APNKit.h */,
 				8C43B2301B855DA8009A0BF5 /* APNObject.h */,
 				8C2C884A1B88158C00C256CB /* APNObjectManager.h */,
 				8C2C884B1B88158C00C256CB /* APNObjectManager.m */,
