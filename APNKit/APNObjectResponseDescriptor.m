@@ -11,13 +11,13 @@
 @implementation APNObjectResponseDescriptor
 
 
-+ (RKResponseDescriptor *)errorDescriptor
-{
++ (RKResponseDescriptor *)errorDescriptor {
     RKObjectMapping *errorMapping = [RKObjectMapping mappingForClass:[RKErrorMessage class]];
-    NSIndexSet *statusCodes = RKStatusCodeIndexSetForClass(RKStatusCodeClassClientError);
+    [errorMapping addPropertyMapping:[RKAttributeMapping attributeMappingFromKeyPath:@"errors" toKeyPath:@"errorMessage"]];
     return [RKResponseDescriptor responseDescriptorWithMapping:errorMapping method:RKRequestMethodAny pathPattern:nil keyPath:nil
-                                                               statusCodes:statusCodes];
+                                                   statusCodes:RKStatusCodeIndexSetForClass(RKStatusCodeClassClientError)];;
 }
+
 
 // Member
 + (RKResponseDescriptor *)loginDescriptor

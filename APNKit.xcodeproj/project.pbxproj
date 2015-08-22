@@ -27,6 +27,7 @@
 		8C6945E01B840D6C009D9370 /* APNImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C6945DF1B840D6C009D9370 /* APNImage.m */; };
 		8CCC6F1D1B88481600F05990 /* APNObjectResponseDescriptor.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CCC6F1C1B88481600F05990 /* APNObjectResponseDescriptor.m */; };
 		8CCC6F201B884B1800F05990 /* APNServerMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CCC6F1F1B884B1800F05990 /* APNServerMessage.m */; };
+		8CCC6F231B885ACF00F05990 /* APNErrorHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CCC6F221B885ACF00F05990 /* APNErrorHandler.m */; };
 		9173951E5370516F8C5CFA80 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EE4E8ECED2B9A5DC9B223A1A /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -93,6 +94,8 @@
 		8CCC6F1C1B88481600F05990 /* APNObjectResponseDescriptor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APNObjectResponseDescriptor.m; sourceTree = "<group>"; };
 		8CCC6F1E1B884B1800F05990 /* APNServerMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APNServerMessage.h; sourceTree = "<group>"; };
 		8CCC6F1F1B884B1800F05990 /* APNServerMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APNServerMessage.m; sourceTree = "<group>"; };
+		8CCC6F211B885ACF00F05990 /* APNErrorHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APNErrorHandler.h; sourceTree = "<group>"; };
+		8CCC6F221B885ACF00F05990 /* APNErrorHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APNErrorHandler.m; sourceTree = "<group>"; };
 		D1A320355A2AE07E0E270746 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		EE4E8ECED2B9A5DC9B223A1A /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		F2D17E47E0362EC2B371D745 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
@@ -166,6 +169,8 @@
 				8C43B2301B855DA8009A0BF5 /* APNObject.h */,
 				8C2C884A1B88158C00C256CB /* APNObjectManager.h */,
 				8C2C884B1B88158C00C256CB /* APNObjectManager.m */,
+				8CCC6F211B885ACF00F05990 /* APNErrorHandler.h */,
+				8CCC6F221B885ACF00F05990 /* APNErrorHandler.m */,
 				8CCC6F1B1B88481600F05990 /* APNObjectResponseDescriptor.h */,
 				8CCC6F1C1B88481600F05990 /* APNObjectResponseDescriptor.m */,
 				8C6945CC1B840C38009D9370 /* APNImageLoader.h */,
@@ -398,6 +403,7 @@
 			files = (
 				8C6004981B86ADEF00AC07E2 /* ViewController.m in Sources */,
 				8C6945CE1B840C38009D9370 /* APNImageLoader.m in Sources */,
+				8CCC6F231B885ACF00F05990 /* APNErrorHandler.m in Sources */,
 				8C43B22F1B84E862009A0BF5 /* APNTag.m in Sources */,
 				8C6945E01B840D6C009D9370 /* APNImage.m in Sources */,
 				8C43B2291B84E2AB009A0BF5 /* APNPlacemark.m in Sources */,

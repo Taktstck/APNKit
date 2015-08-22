@@ -10,10 +10,11 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+@class APNError;
 @interface APNServerMessage : NSObject
 
-@property (nullable, nonatomic, retain) NSArray *messages;
-@property (nullable, nonatomic, retain) NSArray *errors;
+@property (nullable, nonatomic, retain) NSArray <NSString *>*messages;
+@property (nullable, nonatomic, retain) NSArray <APNError *>*errors;
 
 @end
 
