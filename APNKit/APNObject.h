@@ -18,6 +18,7 @@
 #import "APNGEO.h"
 #import "APNComment.h"
 #import "APNTag.h"
+#import "APNError.h"
 
 
 #endif /* APNObject_h */
