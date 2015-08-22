@@ -269,5 +269,12 @@ static APNImageLoader *_sharedInstance = nil;
     }
 }
 
+- (void)dealloc
+{
+    _imageCache = nil;
+    _thumbnaillCache = nil;
+    _requestingUrls = nil;
+}
+
 @end
 
