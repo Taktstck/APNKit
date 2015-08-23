@@ -140,3 +140,73 @@ static APNObjectManager *sharedManager = nil;
 }
 
 @end
+
+@implementation APNObjectManager (APNObjectDescriptor)
+
+- (void)setupAllDescriptor
+{
+    
+    [[RKObjectManager sharedManager] addResponseDescriptorsFromArray:@[
+                                                                       
+    // Error
+    [APNObjectResponseDescriptor errorDescriptor],
+    
+    // Member
+    [APNObjectResponseDescriptor signupDescriptor],
+    [APNObjectResponseDescriptor loginDescriptor],
+    [APNObjectResponseDescriptor logoutDescriptor],
+    [APNObjectResponseDescriptor forgatPasswordDescriptor],
+    
+    
+    // Account
+    [APNObjectResponseDescriptor accountShow],
+    [APNObjectResponseDescriptor accountVerifyCredentialDescriptor],
+    [APNObjectResponseDescriptor accountUpdateProfileDescriptor],
+    [APNObjectResponseDescriptor accountUpdateProfileImageDescriptor],
+    [APNObjectResponseDescriptor accountUpdateProfileBackgroundImageDescriptor],
+    [APNObjectResponseDescriptor accountOpenDescriptor],
+    [APNObjectResponseDescriptor accountSuspendDescriptor],
+    
+    // Tags
+    [APNObjectResponseDescriptor tagsSearchDescriptor],
+    
+    // Community
+    [APNObjectResponseDescriptor communitiesNearby],
+    [APNObjectResponseDescriptor communitiesHot],
+    [APNObjectResponseDescriptor communitiesShow],
+    [APNObjectResponseDescriptor communitiesUserTimeline],
+    [APNObjectResponseDescriptor communitiesFavoriteTimeline],
+    [APNObjectResponseDescriptor communitiesJoinTimeline],
+    [APNObjectResponseDescriptor communitiesViewTimeline],
+    [APNObjectResponseDescriptor communitiesCreate],
+    [APNObjectResponseDescriptor communitiesUpdate],
+    [APNObjectResponseDescriptor communitiesUpdateImage],
+    [APNObjectResponseDescriptor communitiesDestroy],
+    [APNObjectResponseDescriptor communitiesOpen],
+    [APNObjectResponseDescriptor communitiesSuspend],
+    [APNObjectResponseDescriptor communitiesClose],
+    [APNObjectResponseDescriptor communitiesFavoriteCreate],
+    [APNObjectResponseDescriptor communitiesFavoriteDestroy],
+    [APNObjectResponseDescriptor communitiesParticipantCreate],
+    [APNObjectResponseDescriptor communitiesParticipantExit],
+    
+    
+    // Board
+    [APNObjectResponseDescriptor boardsCommunityTimeline],
+    [APNObjectResponseDescriptor boardsUserTimeline],
+    [APNObjectResponseDescriptor boardsFavoriteTimeline],
+    [APNObjectResponseDescriptor boardsCreate],
+    [APNObjectResponseDescriptor boardsDestroy],
+    [APNObjectResponseDescriptor boardsSuspend],
+    [APNObjectResponseDescriptor boardsFavoriteCreate],
+    [APNObjectResponseDescriptor boardsFavoriteDestroy],
+    
+    // Comments
+    [APNObjectResponseDescriptor commentsTimeline],
+    [APNObjectResponseDescriptor commentsCreate],
+    [APNObjectResponseDescriptor commentsDestroy],
+    [APNObjectResponseDescriptor commentsSuspend]
+    ]];
+}
+
+@end

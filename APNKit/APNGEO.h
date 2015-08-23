@@ -11,6 +11,6 @@
 @interface APNGEO : NSObject
 
 @property (nonatomic) NSString *type;
-@property (nonatomic) NSArray <NSNumber *>*coordinates;
+@property (nonatomic) NSOrderedSet <NSNumber *>*coordinates;
 
 @end

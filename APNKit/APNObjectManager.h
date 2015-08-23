@@ -7,8 +7,10 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <RestKit/RestKit.h>
 #import "APNObject.h"
 #import "APNImageLoader.h"
+#import "APNObjectResponseDescriptor.h"
 
 @interface APNObjectManager : NSObject
 
@@ -26,8 +28,12 @@
 
 @interface APNObjectManager (APNImageLoader) <APNImageLoaderDelegate>
 
-
-
 - (void)getImageForImage:(APNImage *)image size:(APNImageSize)size completionHandler:(void (^)(NSData *data, UIImage *image, NSError *error))completion;
+
+@end
+
+@interface APNObjectManager (APNObjectDescriptor)
+
+- (void)setupAllDescriptor;
 
 @end
