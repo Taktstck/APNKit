@@ -10,7 +10,7 @@
 
 @class APNImage, APNGEO;
 
-@interface APNAccount : NSObject
+@interface APNAccount : NSObject <NSCoding>
 
 @property (nonatomic) NSString *gender;
 @property (nonatomic) NSDate *birthday;
