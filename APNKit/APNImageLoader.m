@@ -166,7 +166,7 @@ static APNImageLoader *_sharedInstance = nil;
         }
         
         completion(response, data, image, error);
-
+        
     }] resume];
 }
 
@@ -244,12 +244,28 @@ static APNImageLoader *_sharedInstance = nil;
             return;
         }
         
-        UIImage *cachedImage = (UIImage *)[[self imageCacheForSize:size] objectForKey:path];
+        NSCache *cache;
+        
+        if ([self.delegate respondsToSelector:@selector(cacheForSize:)]) {
+            cache = [self.delegate cacheForSize:size];
+        } else {
+            cache = [self imageCacheForSize:size];
+        }
+        
+        UIImage *cachedImage = (UIImage *)[cache objectForKey:path];
+        
         if (cachedImage) {
             completion(nil, cachedImage, nil);
         } else {
             NSURLRequest *req = [NSURLRequest requestWithURL:[NSURL URLWithString:path] cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData timeoutInterval:20];
-            __weak NSCache *__imageCache = [self imageCacheForSize:size];
+            __weak NSCache *__imageCache;
+            
+            if ([self.delegate respondsToSelector:@selector(cacheForSize:)]) {
+                __imageCache = [self.delegate cacheForSize:size];
+            } else {
+                __imageCache = [self imageCacheForSize:size];
+            }
+            
             __weak NSCache *__requestingUrls = self.requestingUrls;
             
             [[[NSURLSession sharedSession] dataTaskWithRequest:req completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
