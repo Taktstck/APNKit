@@ -234,38 +234,39 @@ static APNImageLoader *_sharedInstance = nil;
 
 - (void)getImageForImage:(APNImage *)image size:(APNImageSize)size completionHandler:(void (^)(NSData *data, UIImage *image, NSError *error))completion
 {
-    
-    NSString *path = @"";
-    if ([self.delegate respondsToSelector:@selector(pathForSize:image:)]) {
-        path = [self.delegate pathForSize:size image:image];
-    }
-    path = [NSString stringWithFormat:@"%@%@", self.baseURL, path];
-    if ([self.requestingUrls objectForKey:path]) {
-        return;
-    }
-
-    UIImage *cachedImage = (UIImage *)[[self imageCacheForSize:size] objectForKey:path];
-    if (cachedImage) {
-        completion(nil, cachedImage, nil);
-    } else {
-        NSURLRequest *req = [NSURLRequest requestWithURL:[NSURL URLWithString:path] cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData timeoutInterval:20];
-        __weak NSCache *__imageCache = [self imageCacheForSize:size];
-        __weak NSCache *__requestingUrls = self.requestingUrls;
+    if (image) {
+        NSString *path = @"";
+        if ([self.delegate respondsToSelector:@selector(pathForSize:image:)]) {
+            path = [self.delegate pathForSize:size image:image];
+        }
+        path = [NSString stringWithFormat:@"%@%@", self.baseURL, path];
+        if ([self.requestingUrls objectForKey:path]) {
+            return;
+        }
         
-        [[[NSURLSession sharedSession] dataTaskWithRequest:req completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+        UIImage *cachedImage = (UIImage *)[[self imageCacheForSize:size] objectForKey:path];
+        if (cachedImage) {
+            completion(nil, cachedImage, nil);
+        } else {
+            NSURLRequest *req = [NSURLRequest requestWithURL:[NSURL URLWithString:path] cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData timeoutInterval:20];
+            __weak NSCache *__imageCache = [self imageCacheForSize:size];
+            __weak NSCache *__requestingUrls = self.requestingUrls;
             
-            [__requestingUrls removeObjectForKey:path];
-            UIImage *image = nil;
-            
-            if (data) {
-                image = [UIImage imageWithData:data];
-                if (image) {
-                    [__imageCache setObject:image forKey:path];
+            [[[NSURLSession sharedSession] dataTaskWithRequest:req completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+                
+                [__requestingUrls removeObjectForKey:path];
+                UIImage *image = nil;
+                
+                if (data) {
+                    image = [UIImage imageWithData:data];
+                    if (image) {
+                        [__imageCache setObject:image forKey:path];
+                    }
                 }
-            }
-            
-            completion(data, image, error);
-        }] resume];
+                
+                completion(data, image, error);
+            }] resume];
+        }
     }
 }
 

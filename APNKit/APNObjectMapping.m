@@ -37,6 +37,10 @@
                                              @"protected"
                                              ]];
     
+    [mapping addPropertyMappingsFromArray:@[
+                                            [RKRelationshipMapping relationshipMappingFromKeyPath:@"profile_background_image" toKeyPath:@"profile_background_image" withMapping:[APNObjectMapping imageMapping]],
+                                            [RKRelationshipMapping relationshipMappingFromKeyPath:@"profile_image" toKeyPath:@"profile_image" withMapping:[APNObjectMapping imageMapping]]
+                                            ]];
     
     return mapping;
 }
@@ -55,8 +59,10 @@
                                              @"geo_enabled",
                                              @"protected"
                                              ]];
-    
-    
+    [mapping addPropertyMappingsFromArray:@[
+                                            [RKRelationshipMapping relationshipMappingFromKeyPath:@"profile_background_image" toKeyPath:@"profile_background_image" withMapping:[APNObjectMapping imageMapping]],
+                                            [RKRelationshipMapping relationshipMappingFromKeyPath:@"profile_image" toKeyPath:@"profile_image" withMapping:[APNObjectMapping imageMapping]]
+                                            ]];
     return mapping;
 }
 
