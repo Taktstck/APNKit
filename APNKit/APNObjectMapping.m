@@ -163,8 +163,25 @@
                                              @"favorite_count"
                                              ]];
     
+    RKObjectMapping *ownerMapping = [RKObjectMapping mappingForClass:[APNUser class]];
+    [ownerMapping addAttributeMappingsFromArray:@[
+                                             @"gender",
+                                             @"birthday",
+                                             @"name",
+                                             @"screen_name",
+                                             @"profile",
+                                             @"location",
+                                             @"age_enabled",
+                                             @"geo_enabled",
+                                             @"protected"
+                                             ]];
+    [ownerMapping addPropertyMappingsFromArray:@[
+                                            [RKRelationshipMapping relationshipMappingFromKeyPath:@"profile_background_image" toKeyPath:@"profile_background_image" withMapping:mapping],
+                                            [RKRelationshipMapping relationshipMappingFromKeyPath:@"profile_image" toKeyPath:@"profile_image" withMapping:mapping]
+                                            ]];
+    
     [mapping addPropertyMappingsFromArray:@[
-                                            [RKRelationshipMapping relationshipMappingFromKeyPath:@"owner" toKeyPath:@"owner" withMapping:[APNObjectMapping userMapping]],
+                                            [RKRelationshipMapping relationshipMappingFromKeyPath:@"owner" toKeyPath:@"owner" withMapping:ownerMapping],
                                             [RKRelationshipMapping relationshipMappingFromKeyPath:@"geo" toKeyPath:@"geo" withMapping:[APNObjectMapping geoMapping]]
                                             ]];
     return mapping;
