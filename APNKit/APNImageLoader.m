@@ -235,7 +235,7 @@ static APNImageLoader *_sharedInstance = nil;
 - (void)getImageForImage:(APNImage *)image size:(APNImageSize)size completionHandler:(void (^)(NSData *data, UIImage *image, NSError *error))completion
 {
     
-    NSString *path = nil;
+    NSString *path = @"";
     if ([self.delegate respondsToSelector:@selector(pathForSize:image:)]) {
         path = [self.delegate pathForSize:size image:image];
     }

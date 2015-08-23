@@ -14,6 +14,8 @@
 
 
 @property (nonatomic) APNImageLoader *imageLoader;
+@property (nonatomic, copy) NSString *imageBaseURL;
+
 @property NSCache *smallImageSizeCache;
 @property NSCache *middleImageSizeCache;
 @property NSCache *largeImageSizeCache;
@@ -23,6 +25,8 @@
 @end
 
 @interface APNObjectManager (APNImageLoader) <APNImageLoaderDelegate>
+
+
 
 - (void)getImageForImage:(APNImage *)image size:(APNImageSize)size completionHandler:(void (^)(NSData *data, UIImage *image, NSError *error))completion;
 

@@ -41,6 +41,12 @@ static APNObjectManager *sharedManager = nil;
     return self;
 }
 
+- (void)setImageBaseURL:(NSString *)imageBaseURL
+{
+    self.imageLoader.baseURL = imageBaseURL;
+}
+
+
 - (NSCache *)smallImageSizeCache
 {
     if (_smallImageSizeCache) {
