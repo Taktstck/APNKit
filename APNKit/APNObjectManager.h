@@ -24,6 +24,6 @@
 
 @interface APNObjectManager (APNImageLoader) <APNImageLoaderDelegate>
 
-- (void)getImageForImage:(APNImage *)image size:(APNImageSize)size completionHandler:(void (^)(NSData *, UIImage *, NSError *))completion;
+- (void)getImageForImage:(APNImage *)image size:(APNImageSize)size completionHandler:(void (^)(NSData *data, UIImage *image, NSError *error))completion;
 
 @end

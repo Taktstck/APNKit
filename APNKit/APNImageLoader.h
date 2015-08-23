@@ -27,16 +27,16 @@ typedef NS_ENUM(NSInteger, APNImageSize) {
 
 + (APNImageLoader *)sharedInstance;
 
-- (void)getImageAtPath:(NSString *)path completionHandler:(void (^)(NSData *, UIImage *, NSError *))completion;
-- (void)getImageAtPath:(NSString *)path cache:(BOOL)cache completionHandler:(void (^)(NSURLResponse *, NSData *, UIImage *, NSError *))completion;
-- (void)getImageAtPath:(NSString *)path cache:(BOOL)cache success:(void (^)(NSURLResponse *, NSData *, UIImage *))success failure:(void (^)(NSError *))failure;
+- (void)getImageAtPath:(NSString *)path completionHandler:(void (^)(NSData *data, UIImage *image, NSError *error))completion;
+- (void)getImageAtPath:(NSString *)path cache:(BOOL)cache completionHandler:(void (^)(NSURLResponse *response, NSData *data, UIImage *image, NSError *error))completion;
+- (void)getImageAtPath:(NSString *)path cache:(BOOL)cache success:(void (^)(NSURLResponse *response, NSData *data, UIImage *image))success failure:(void (^)(NSError *))failure;
 
 @end
 
 
 @interface APNImageLoader (APNImage)
 
-- (void)getImageForImage:(APNImage *)image size:(APNImageSize)size completionHandler:(void (^)(NSData *, UIImage *, NSError *))completion;
+- (void)getImageForImage:(APNImage *)image size:(APNImageSize)size completionHandler:(void (^)(NSData *data, UIImage *image, NSError *error))completion;
 
 @end
 

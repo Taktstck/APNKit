@@ -91,7 +91,7 @@ static APNImageLoader *_sharedInstance = nil;
     return _requestingUrls;
 }
 
-- (void)getImageAtPath:(NSString *)path completionHandler:(void (^)(NSData *, UIImage *, NSError *))completion
+- (void)getImageAtPath:(NSString *)path completionHandler:(void (^)(NSData *data, UIImage *image, NSError *error))completion
 {
     UIImage *image = (UIImage *)[self.imageCache objectForKey:path];
     if (image) {
@@ -128,7 +128,7 @@ static APNImageLoader *_sharedInstance = nil;
     }] resume];
 }
 
-- (void)getImageAtPath:(NSString *)path cache:(BOOL)cache completionHandler:(void (^)(NSURLResponse *, NSData *, UIImage *, NSError *))completion
+- (void)getImageAtPath:(NSString *)path cache:(BOOL)cache completionHandler:(void (^)(NSURLResponse *response, NSData *data, UIImage *image, NSError *error))completion
 {
     if (cache) {
         UIImage *image = (UIImage *)[self.imageCache objectForKey:path];
@@ -143,7 +143,7 @@ static APNImageLoader *_sharedInstance = nil;
     }
 }
 
-- (void)_getImageAtPath:(NSString *)path cache:(BOOL)cache completionHandler:(void (^)(NSURLResponse *, NSData *, UIImage *, NSError *))completion
+- (void)_getImageAtPath:(NSString *)path cache:(BOOL)cache completionHandler:(void (^)(NSURLResponse *response, NSData *data, UIImage *image, NSError *error))completion
 {
     if ([self.requestingUrls objectForKey:path]) {
         return;
@@ -170,7 +170,7 @@ static APNImageLoader *_sharedInstance = nil;
     }] resume];
 }
 
-- (void)getImageAtPath:(NSString *)path cache:(BOOL)cache success:(void (^)(NSURLResponse *, NSData *, UIImage *))success failure:(void (^)(NSError *))failure
+- (void)getImageAtPath:(NSString *)path cache:(BOOL)cache success:(void (^)(NSURLResponse *response, NSData *data, UIImage *image))success failure:(void (^)(NSError *))failure
 {
     UIImage *image = (UIImage *)[self.imageCache objectForKey:path];
     if (image) {
@@ -181,7 +181,7 @@ static APNImageLoader *_sharedInstance = nil;
     }
 }
 
-- (void)_getImageAtPath:(NSString *)path cache:(BOOL)cache success:(void (^)(NSURLResponse *, NSData *, UIImage *))success failure:(void (^)(NSError *))failure
+- (void)_getImageAtPath:(NSString *)path cache:(BOOL)cache success:(void (^)(NSURLResponse *response, NSData *data, UIImage *image))success failure:(void (^)(NSError *))failure
 {
     if ([self.requestingUrls objectForKey:path]) {
         return;
@@ -232,7 +232,7 @@ static APNImageLoader *_sharedInstance = nil;
     }
 }
 
-- (void)getImageForImage:(APNImage *)image size:(APNImageSize)size completionHandler:(void (^)(NSData *, UIImage *, NSError *))completion
+- (void)getImageForImage:(APNImage *)image size:(APNImageSize)size completionHandler:(void (^)(NSData *data, UIImage *image, NSError *error))completion
 {
     
     NSString *path = nil;

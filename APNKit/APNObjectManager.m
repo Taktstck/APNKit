@@ -128,7 +128,7 @@ static APNObjectManager *sharedManager = nil;
     return path;
 }
 
-- (void)getImageForImage:(APNImage *)image size:(APNImageSize)size completionHandler:(void (^)(NSData *, UIImage *, NSError *))completion
+- (void)getImageForImage:(APNImage *)image size:(APNImageSize)size completionHandler:(void (^)(NSData *data, UIImage *image, NSError *error))completion
 {
     [self.imageLoader getImageForImage:image size:size completionHandler:completion];
 }
