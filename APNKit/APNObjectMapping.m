@@ -49,6 +49,7 @@
 {
     RKObjectMapping *mapping = [RKObjectMapping mappingForClass:[APNUser class]];
     [mapping addAttributeMappingsFromArray:@[
+                                             @"id",
                                              @"gender",
                                              @"birthday",
                                              @"name",
@@ -165,6 +166,7 @@
     
     RKObjectMapping *ownerMapping = [RKObjectMapping mappingForClass:[APNUser class]];
     [ownerMapping addAttributeMappingsFromArray:@[
+                                             @"id",
                                              @"gender",
                                              @"birthday",
                                              @"name",

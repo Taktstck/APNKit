@@ -92,15 +92,15 @@ static APNObjectManager *sharedManager = nil;
     switch (size) {
         case APNImageSizeLarge:
         case APNImageSizeOriginal:
-            cache = self.largeImageSizeCache;
+            cache = [self largeImageSizeCache];
             break;
         case APNImageSizeSmall:
         case APNImageSizeThumbnail:
-            cache = self.smallImageSizeCache;
+            cache = [self smallImageSizeCache];
             break;
         case APNImageSizeMedium:
         default:
-            cache = self.middleImageSizeCache;
+            cache = [self middleImageSizeCache];
             break;
     }
     return cache;

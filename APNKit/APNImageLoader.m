@@ -93,7 +93,7 @@ static APNImageLoader *_sharedInstance = nil;
 
 - (void)getImageAtPath:(NSString *)path completionHandler:(void (^)(NSData *data, UIImage *image, NSError *error))completion
 {
-    UIImage *image = (UIImage *)[self.imageCache objectForKey:path];
+    UIImage *image = (UIImage *)[[self imageCache] objectForKey:path];
     if (image) {
         completion(nil, image, nil);
         return;
@@ -109,7 +109,7 @@ static APNImageLoader *_sharedInstance = nil;
     }
     
     NSURLRequest *req = [NSURLRequest requestWithURL:[NSURL URLWithString:path] cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData timeoutInterval:20];
-    NSCache *__imageCache = self.imageCache;
+    NSCache *__imageCache = [self imageCache];
     NSCache *__requestingUrls = self.requestingUrls;
     
     [[[NSURLSession sharedSession] dataTaskWithRequest:req completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
@@ -131,7 +131,7 @@ static APNImageLoader *_sharedInstance = nil;
 - (void)getImageAtPath:(NSString *)path cache:(BOOL)cache completionHandler:(void (^)(NSURLResponse *response, NSData *data, UIImage *image, NSError *error))completion
 {
     if (cache) {
-        UIImage *image = (UIImage *)[self.imageCache objectForKey:path];
+        UIImage *image = (UIImage *)[[self imageCache] objectForKey:path];
         if (image) {
             completion(nil, nil, image, nil);
             return;
@@ -150,7 +150,7 @@ static APNImageLoader *_sharedInstance = nil;
     }
     
     NSURLRequest *req = [NSURLRequest requestWithURL:[NSURL URLWithString:path] cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData timeoutInterval:20];
-    NSCache *__imageCache = self.imageCache;
+    NSCache *__imageCache = [self imageCache];
     NSCache *__requestingUrls = self.requestingUrls;
     
     [[[NSURLSession sharedSession] dataTaskWithRequest:req completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
@@ -172,7 +172,7 @@ static APNImageLoader *_sharedInstance = nil;
 
 - (void)getImageAtPath:(NSString *)path cache:(BOOL)cache success:(void (^)(NSURLResponse *response, NSData *data, UIImage *image))success failure:(void (^)(NSError *))failure
 {
-    UIImage *image = (UIImage *)[self.imageCache objectForKey:path];
+    UIImage *image = (UIImage *)[[self imageCache] objectForKey:path];
     if (image) {
         success(nil, nil, image);
         return;
@@ -188,7 +188,7 @@ static APNImageLoader *_sharedInstance = nil;
     }
     
     NSURLRequest *req = [NSURLRequest requestWithURL:[NSURL URLWithString:path] cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData timeoutInterval:20];
-    NSCache *__imageCache = self.imageCache;
+    NSCache *__imageCache = [self imageCache];
     NSCache *__requestingUrls = self.requestingUrls;
     
     [[[NSURLSession sharedSession] dataTaskWithRequest:req completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
