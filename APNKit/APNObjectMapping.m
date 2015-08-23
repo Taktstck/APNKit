@@ -158,10 +158,10 @@
                                              @"name",
                                              @"encoding",
                                              @"mimetype",
-                                             @"data",
                                              @"dominant_color",
                                              @"favorite_count"
                                              ]];
+    
     
     RKObjectMapping *ownerMapping = [RKObjectMapping mappingForClass:[APNUser class]];
     [ownerMapping addAttributeMappingsFromArray:@[

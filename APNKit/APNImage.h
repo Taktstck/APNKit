@@ -24,6 +24,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nullable, nonatomic, retain) NSString *dominant_color;
 @property (nullable, nonatomic, retain) NSNumber *favorite_count;
 
+/*
 // size
 @property (nullable, nonatomic, retain) NSData *extraLarge;
 @property (nullable, nonatomic, retain) NSData *large;
@@ -31,7 +32,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nullable, nonatomic, retain) NSData *original;
 @property (nullable, nonatomic, retain) NSData *small;
 @property (nullable, nonatomic, retain) NSData *thumbnail;
-
+*/
 @end
 
 NS_ASSUME_NONNULL_END
