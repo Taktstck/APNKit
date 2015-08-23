@@ -10,7 +10,7 @@
 #define APNKit_h
 
 #import "APNObject.h"
-#import "APNObjectManger.h"
+#import "APNObjectManager.h"
 #import "APNImageLoader.h"
 #import "APNObjectMapping.h"
 
