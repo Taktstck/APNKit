@@ -22,7 +22,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nullable, nonatomic, retain) NSString *url;
 @property (nullable, nonatomic, retain) NSString *profile;
 @property (nullable, nonatomic, retain) NSString *location;
-@property (nullable, nonatomic, retain) APNImage *profile_Image;
+@property (nullable, nonatomic, retain) APNImage *profile_image;
 @property (nullable, nonatomic, retain) APNImage *profile_background_image;
 @property (nonatomic) BOOL geo_enabled;
 @property (nonatomic) BOOL age_enabled;

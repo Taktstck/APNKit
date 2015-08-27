@@ -26,6 +26,7 @@
 {
     RKObjectMapping *mapping = [RKObjectMapping mappingForClass:[APNAccount class]];
     [mapping addAttributeMappingsFromArray:@[
+                                             @"id",
                                              @"gender",
                                              @"birthday",
                                              @"name",
