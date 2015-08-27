@@ -8,23 +8,27 @@
 
 #import <Foundation/Foundation.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 @class APNImage, APNGEO;
 
 @interface APNAccount : NSObject <NSCoding>
 
-@property (nonatomic) NSString *gender;
-@property (nonatomic) NSDate *birthday;
-@property (nonatomic) NSString *name;
-@property (nonatomic) NSString *screen_name;
-@property (nonatomic) NSString *url;
-@property (nonatomic) NSString *profile;
-@property (nonatomic) NSString *location;
-@property (nonatomic) APNImage *profile_image;
-@property (nonatomic) APNImage *profile_background_image;
+@property (nullable, nonatomic, retain) NSString *id;
+@property (nullable, nonatomic, retain) NSString *gender;
+@property (nullable, nonatomic, retain) NSDate *birthday;
+@property (nullable, nonatomic, retain) NSString *name;
+@property (nullable, nonatomic, retain) NSString *screen_name;
+@property (nullable, nonatomic, retain) NSString *url;
+@property (nullable, nonatomic, retain) NSString *profile;
+@property (nullable, nonatomic, retain) NSString *location;
+@property (nullable, nonatomic, retain) APNImage *profile_Image;
+@property (nullable, nonatomic, retain) APNImage *profile_background_image;
 @property (nonatomic) BOOL geo_enabled;
 @property (nonatomic) BOOL age_enabled;
 @property (nonatomic) BOOL protected;
-@property (nonatomic) APNGEO *geo;
-
+@property (nullable, nonatomic, retain) APNGEO *geo;
 
 @end
+
+NS_ASSUME_NONNULL_END

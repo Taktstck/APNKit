@@ -12,6 +12,7 @@
 
 @interface APNComment : NSObject
 
+@property (nonatomic) NSString *id;
 @property (nonatomic) NSDate *created_at;
 @property (nonatomic) APNUser *owner;
 @property (nonatomic) APNBoard *board;

@@ -14,6 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface APNUser : NSObject
 
+@property (nullable, nonatomic, retain) NSString *id;
 @property (nullable, nonatomic, retain) NSString *gender;
 @property (nullable, nonatomic, retain) NSDate *birthday;
 @property (nullable, nonatomic, retain) NSString *name;
