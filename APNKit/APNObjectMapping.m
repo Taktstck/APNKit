@@ -91,7 +91,7 @@
                                             [RKRelationshipMapping relationshipMappingFromKeyPath:@"geo" toKeyPath:@"geo" withMapping:[APNObjectMapping geoMapping]]
                                             ]];
     return mapping;
-
+    
 }
 
 
@@ -112,7 +112,7 @@
                                             [RKRelationshipMapping relationshipMappingFromKeyPath:@"geo" toKeyPath:@"geo" withMapping:[APNObjectMapping geoMapping]]
                                             ]];
     return mapping;
-
+    
 }
 
 
@@ -125,7 +125,7 @@
                                              ]];
     
     return mapping;
-
+    
 }
 
 
@@ -148,47 +148,60 @@
                                              @"thoroughfare"
                                              ]];
     return mapping;
-
+    
 }
 
 
 + (RKObjectMapping *)imageMapping
 {
-    RKObjectMapping *mapping = [RKObjectMapping mappingForClass:[APNImage class]];
-    [mapping addAttributeMappingsFromArray:@[
-                                             @"id",
-                                             @"name",
-                                             @"encoding",
-                                             @"mimetype",
-                                             @"dominant_color",
-                                             @"favorite_count"
-                                             ]];
+    RKDynamicMapping *dynamicMapping = [RKDynamicMapping new];
+    [dynamicMapping setObjectMappingForRepresentationBlock:^RKObjectMapping *(id representation) {
+        if (![representation isKindOfClass:[NSString class]]) {
+            RKObjectMapping *mapping = [RKObjectMapping mappingForClass:[APNImage class]];
+            [mapping addAttributeMappingsFromArray:@[
+                                                     @"id",
+                                                     @"name",
+                                                     @"encoding",
+                                                     @"mimetype",
+                                                     @"dominant_color",
+                                                     @"favorite_count"
+                                                     ]];
+            
+            RKObjectMapping *ownerMapping = [RKObjectMapping mappingForClass:[APNUser class]];
+            [ownerMapping addAttributeMappingsFromArray:@[
+                                                          @"id",
+                                                          @"gender",
+                                                          @"birthday",
+                                                          @"name",
+                                                          @"screen_name",
+                                                          @"profile",
+                                                          @"location",
+                                                          @"age_enabled",
+                                                          @"geo_enabled",
+                                                          @"protected"
+                                                          ]];
+            
+            [ownerMapping addPropertyMappingsFromArray:@[
+                                                         [RKRelationshipMapping relationshipMappingFromKeyPath:@"profile_background_image" toKeyPath:@"profile_background_image" withMapping:mapping],
+                                                         [RKRelationshipMapping relationshipMappingFromKeyPath:@"profile_image" toKeyPath:@"profile_image" withMapping:mapping]
+                                                         ]];
+            
+            [mapping addPropertyMappingsFromArray:@[
+                                                    [RKRelationshipMapping relationshipMappingFromKeyPath:@"owner" toKeyPath:@"owner" withMapping:ownerMapping],
+                                                    [RKRelationshipMapping relationshipMappingFromKeyPath:@"geo" toKeyPath:@"geo" withMapping:[APNObjectMapping geoMapping]]
+                                                    ]];
+            
+            return mapping;
+        } else {
+            RKObjectMapping *mapping = [RKObjectMapping mappingForClass:[APNImage class]];
+            [mapping addPropertyMapping:[RKAttributeMapping attributeMappingFromKeyPath:nil toKeyPath:@"id"]];
+            return mapping;
+        }
+        
+        return nil;
+    }];
     
-    
-    RKObjectMapping *ownerMapping = [RKObjectMapping mappingForClass:[APNUser class]];
-    [ownerMapping addAttributeMappingsFromArray:@[
-                                             @"id",
-                                             @"gender",
-                                             @"birthday",
-                                             @"name",
-                                             @"screen_name",
-                                             @"profile",
-                                             @"location",
-                                             @"age_enabled",
-                                             @"geo_enabled",
-                                             @"protected"
-                                             ]];
-    [ownerMapping addPropertyMappingsFromArray:@[
-                                            [RKRelationshipMapping relationshipMappingFromKeyPath:@"profile_background_image" toKeyPath:@"profile_background_image" withMapping:mapping],
-                                            [RKRelationshipMapping relationshipMappingFromKeyPath:@"profile_image" toKeyPath:@"profile_image" withMapping:mapping]
-                                            ]];
-    
-    [mapping addPropertyMappingsFromArray:@[
-                                            [RKRelationshipMapping relationshipMappingFromKeyPath:@"owner" toKeyPath:@"owner" withMapping:ownerMapping],
-                                            [RKRelationshipMapping relationshipMappingFromKeyPath:@"geo" toKeyPath:@"geo" withMapping:[APNObjectMapping geoMapping]]
-                                            ]];
-    return mapping;
-
+    return (RKObjectMapping *)dynamicMapping;
 }
 
 
